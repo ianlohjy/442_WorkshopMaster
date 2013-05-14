@@ -22,9 +22,7 @@ class PParticleSystem
     
   void applyBehaviour(PParticlePoint p, int bIdx)
   {
-    PVector f = (((PParticleBehaviour)mBehaviours.get(bIdx)).getForce(p.mPos, new PVector(mouseX, mouseY, 0.0)));
-    println( f);
-    p.applyForce(f);
+    p.applyForce(((PParticleBehaviour)mBehaviours.get(bIdx)).getForce(p.mPos, new PVector(mouseX, mouseY, 0.0)));
   }
   
   void updateAndDraw()
