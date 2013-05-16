@@ -27,7 +27,7 @@ class Jitter implements PParticleBehaviour
 {
    PVector getForce( PVector iPos ) {
       PVector newPosOffset = PVector.mult(iPos, PVector.random2D());
-      newPosOffset.mult(0.001);
+      newPosOffset.mult(0.01);
       return newPosOffset;
    }
 }
