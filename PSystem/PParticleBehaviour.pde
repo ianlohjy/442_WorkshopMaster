@@ -1,12 +1,33 @@
 interface PParticleBehaviour {
-  PVector getForce( PVector iPos, PVector iTarget );
+  PVector getForce( PVector iPos);
 }
 
-class ChaseTarget implements PParticleBehaviour
+class TargetedBehaviour
 {
-   PVector getForce( PVector iPos, PVector iTarget ) {
-      PVector newPos = PVector.sub(iTarget, iPos);
-      newPos.mult(0.01);            
-      return newPos;
+  PVector mTarget;
+  TargetedBehaviour(PVector iTarget) {
+    mTarget = iTarget; 
+  }
+}
+
+class ChaseTarget extends TargetedBehaviour implements PParticleBehaviour
+{
+   ChaseTarget(PVector iTarget) {
+     super(iTarget);
+   }
+   
+   PVector getForce( PVector iPos ) {
+     PVector newPosOffset = PVector.sub(mTarget, iPos);
+     newPosOffset.mult(0.01);            
+     return newPosOffset;
+   }
+}
+
+class Jitter implements PParticleBehaviour
+{
+   PVector getForce( PVector iPos ) {
+      PVector newPosOffset = PVector.mult(iPos, PVector.random2D());
+      newPosOffset.mult(0.001);
+      return newPosOffset;
    }
 }
